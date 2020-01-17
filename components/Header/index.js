@@ -12,22 +12,29 @@
 function Header() {
   // Select Elements
 
-  const header = document.createElement("div");
+  const headerBox = document.createElement("div");
   const date = document.createElement("span");
   const title = document.createElement("h1");
   const temp = document.createElement("span");
 
   // Give Elements Classes
 
-  header.classList.add("header");
+  headerBox.classList.add("header");
   date.classList.add("date");
   temp.classList.add("temp");
 
+  // Attributes
+  title.textContent = "Lambda Times";
+  date.textContent = "MARCH 28, 2019";
+  temp.textContent = "98 	\u00B0";
+
   // Append Elements
 
-  header.append(date, title, temp);
+  headerBox.appendChild(date);
+  headerBox.appendChild(title);
+  headerBox.appendChild(temp);
 
-  return header;
+  return headerBox;
 }
 
 const headerContainer = document.querySelector(".header-container");

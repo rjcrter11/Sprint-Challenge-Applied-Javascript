@@ -82,7 +82,7 @@ function lambdaCards(data) {
   author.classList.add("author");
   imgContainer.classList.add("img-container");
 
-  // Add Properties
+  // Add Attributes
 
   headline.textContent = data.headline;
   img.src = data.authorPhoto;
