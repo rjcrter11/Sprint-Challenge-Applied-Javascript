@@ -23,7 +23,18 @@ const cardsContainer = document.querySelector(".cards-container");
 axios
   .get("https://lambda-times-backend.herokuapp.com/articles")
   .then((response) => {
-    console.log(Object.values(response.data.articles.javascript));
+    Object.keys(response.data.articles.javascript).forEach((key) => {
+      cardsContainer.append(
+        lambdaCards(response.data.articles.javascript[key])
+      );
+    });
+    return axios.get("https://lambda-times-backend.herokuapp.com/articles");
+  })
+  .then((response) => {
+    console.log(response);
+    Object.keys(response.data.articles.bootstrap).forEach((key) => {
+      cardsContainer.append(lambdaCards(response.data.articles.bootstrap[key]));
+    });
   })
   .catch((error) => {
     console.log("data not retrieved", error);
