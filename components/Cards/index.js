@@ -31,9 +31,28 @@ axios
     return axios.get("https://lambda-times-backend.herokuapp.com/articles");
   })
   .then((response) => {
-    console.log(response);
     Object.keys(response.data.articles.bootstrap).forEach((key) => {
       cardsContainer.append(lambdaCards(response.data.articles.bootstrap[key]));
+    });
+    return axios.get("https://lambda-times-backend.herokuapp.com/articles");
+  })
+  .then((response) => {
+    Object.keys(response.data.articles.technology).forEach((key) => {
+      cardsContainer.append(
+        lambdaCards(response.data.articles.technology[key])
+      );
+    });
+    return axios.get("https://lambda-times-backend.herokuapp.com/articles");
+  })
+  .then((response) => {
+    Object.keys(response.data.articles.jquery).forEach((key) => {
+      cardsContainer.append(lambdaCards(response.data.articles.jquery[key]));
+    });
+    return axios.get("https://lambda-times-backend.herokuapp.com/articles");
+  })
+  .then((response) => {
+    Object.keys(response.data.articles.node).forEach((key) => {
+      cardsContainer.append(lambdaCards(response.data.articles.node[key]));
     });
   })
   .catch((error) => {
