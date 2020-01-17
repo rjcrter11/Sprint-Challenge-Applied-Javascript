@@ -17,3 +17,76 @@
 // </div>
 //
 // Create a card for each of the articles and add the card to the DOM.
+
+const cardsContainer = document.querySelector(".cards-container");
+
+axios
+  .get("https://lambda-times-backend.herokuapp.com/articles")
+  .then((response) => {
+    Object.keys(response.data.articles.javascript).forEach((key) => {
+      cardsContainer.append(
+        lambdaCards(response.data.articles.javascript[key])
+      );
+    });
+    return axios.get("https://lambda-times-backend.herokuapp.com/articles");
+  })
+  .then((response) => {
+    Object.keys(response.data.articles.bootstrap).forEach((key) => {
+      cardsContainer.append(lambdaCards(response.data.articles.bootstrap[key]));
+    });
+    return axios.get("https://lambda-times-backend.herokuapp.com/articles");
+  })
+  .then((response) => {
+    Object.keys(response.data.articles.technology).forEach((key) => {
+      cardsContainer.append(
+        lambdaCards(response.data.articles.technology[key])
+      );
+    });
+    return axios.get("https://lambda-times-backend.herokuapp.com/articles");
+  })
+  .then((response) => {
+    Object.keys(response.data.articles.jquery).forEach((key) => {
+      cardsContainer.append(lambdaCards(response.data.articles.jquery[key]));
+    });
+    return axios.get("https://lambda-times-backend.herokuapp.com/articles");
+  })
+  .then((response) => {
+    Object.keys(response.data.articles.node).forEach((key) => {
+      cardsContainer.append(lambdaCards(response.data.articles.node[key]));
+    });
+  })
+  .catch((error) => {
+    console.log("data not retrieved", error);
+  });
+
+function lambdaCards(data) {
+  // Select Elements
+
+  const card = document.createElement("div");
+  const headline = document.createElement("div");
+  const author = document.createElement("div");
+  const imgContainer = document.createElement("div");
+  const img = document.createElement("img");
+  const name = document.createElement("span");
+
+  // Append Elements
+
+  card.append(headline, author);
+  author.append(imgContainer, name);
+  imgContainer.append(img);
+
+  // Add Classes
+
+  card.classList.add("card");
+  headline.classList.add("headline");
+  author.classList.add("author");
+  imgContainer.classList.add("img-container");
+
+  // Add Attributes
+
+  headline.textContent = data.headline;
+  img.src = data.authorPhoto;
+  name.textContent = `By ${data.authorName}`;
+
+  return card;
+}
